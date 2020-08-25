@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Header } from './components';
+import { Products, ProductPage, Cart } from './pages';
+import CartContext from './context/CartContext';
+import { Switch, Route } from 'react-router-dom';
+import './App.scss';
 
 function App() {
+  const [cart, changeCart] = useState({ products: {}, total: 0, productsCount: 0 });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CartContext.Provider value={{ cart, changeCart }}>
+        <Route path="/" component={Header} />
+        <Switch>
+          <Route path="/cart" component={Cart} />
+          <Route path="/:id" component={ProductPage} />
+          <Route path="/" component={Products} />
+        </Switch>
+      </CartContext.Provider>
     </div>
   );
 }

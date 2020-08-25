@@ -1,0 +1,124 @@
+@import '../../assets/variables';
+
+.product-card {
+  position: relative;
+  padding: 15px 10px;
+  margin-bottom: 25px;
+  width: 22%;
+  border-radius: 10px;
+  border-top: 15px solid $violet;
+  background-color: #fff;
+  box-shadow: $default-shadow;
+  overflow: hidden;
+  transition: 0.2s;
+  &.in-cart {
+    border-top: 15px solid $green;
+  }
+  h3 a {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      color: $grey;
+      text-decoration: underline;
+    }
+  }
+  &:not(:nth-child(4n)) {
+    margin-right: 3%;
+  }
+  &:hover {
+    .add-to-cart {
+      transform: translateY(0);
+    }
+  }
+  &__info {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__origin {
+    color: $grey;
+    font-size: 14px;
+  }
+  &__price {
+    font-weight: 700;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  .check-icon {
+    position: absolute;
+    width: 30px;
+    bottom: 10px;
+    right: 10px;
+    color: $green;
+  }
+  .add-to-cart {
+    &:hover {
+      transform: scale(1.2);
+    }
+    &:active {
+      transition: 0.1s;
+      transform: none;
+      opacity: 0.7;
+    }
+  }
+}
+
+.add-to-cart {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: $violet;
+  transition: 0.3s;
+  cursor: pointer;
+  transform: translateY(40px);
+  .add-to-cart-icon {
+    display: inline-block;
+    width: 20px;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1025px) {
+  .product-card {
+    .add-to-cart {
+      transform: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: 47%;
+    h3 {
+      font-size: 16px;
+    }
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+    &:not(:nth-child(2n)) {
+      margin-right: 6%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    .add-to-cart {
+      border-radius: 15px;
+      width: 4em;
+    }
+    .add-to-cart,
+    .in-cart-icon {
+      position: static;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import '../../assets/variables';
+
+.cart {
+  margin-top: 50px;
+  &__inner {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+  }
+  &__products {
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: $default-shadow;
+  }
+  &__title {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  &__total-payable {
+    position: relative;
+    margin-top: 40px;
+    text-align: right;
+    font-size: 25px;
+    font-weight: 700;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      right: 0;
+      width: 70%;
+      height: 1px;
+      background-color: $light-grey;
+    }
+  }
+  &__empty {
+    text-align: center;
+    color: $light-grey;
+    .cross-icon {
+      width: 100px;
+    }
+    span {
+      font-size: 18px;
+    }
+  }
+}

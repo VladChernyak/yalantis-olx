@@ -1,0 +1,16 @@
+@import '../../assets/variables';
+
+.header {
+  height: 80px;
+  background-color: #fff;
+  box-shadow: $default-shadow;
+  .container {
+    height: 100%;
+  }
+  &__content {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

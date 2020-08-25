@@ -1,0 +1,22 @@
+@import '../../assets/variables';
+
+.logo {
+  display: flex;
+  align-items: center;
+  &__icon {
+    color: $violet;
+    min-width: 40px;
+  }
+  &__name {
+    font-weight: 700;
+    margin-left: 10px;
+    font-size: 18px;
+    color: #000;
+  }
+}
+
+@media (max-width: 370px) {
+  .logo__name {
+    display: none;
+  }
+}

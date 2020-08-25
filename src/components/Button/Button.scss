@@ -1,0 +1,15 @@
+@import '../../assets/variables';
+
+.button {
+  padding: 0.3em 1em;
+  border: 1px solid $violet;
+  border-radius: 0.5em;
+  font-size: 18px;
+  color: $violet;
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    background-color: $violet;
+    color: #fff;
+  }
+}

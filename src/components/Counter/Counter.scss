@@ -1,0 +1,36 @@
+@import '../../assets/variables';
+
+.counter {
+  font-size: 16px;
+  user-select: none;
+  &__button {
+    width: 1.8em;
+    height: 1.8em;
+    background-color: $violet;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 0.7em;
+    vertical-align: middle;
+    cursor: pointer;
+    &[disabled] {
+      opacity: 0.5;
+    }
+    &:active {
+      background-color: lighten($violet, 5%);
+    }
+  }
+  .minus-icon,
+  .plus-icon {
+    width: 1.2em;
+  }
+  &__value {
+    font-weight: 700;
+    color: $grey;
+    font-size: 1.5em;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}

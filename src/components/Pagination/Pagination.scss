@@ -1,0 +1,34 @@
+@import '../../assets/variables';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  &__inner {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    box-shadow: $default-shadow;
+    border-radius: 25px;
+  }
+  &__separator {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid $violet;
+    color: $violet;
+    border-radius: 50%;
+    font-weight: 700;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+    &.current {
+      background-color: $violet;
+      color: #fff;
+    }
+  }
+}

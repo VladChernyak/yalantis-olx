@@ -1,0 +1,14 @@
+@import '../../assets/variables';
+
+.product-list {
+  margin-bottom: 20px;
+  min-height: 600px;
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__no-products {
+    text-align: center;
+    color: $grey;
+  }
+}
