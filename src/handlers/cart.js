@@ -25,18 +25,12 @@ export const deleteProduct = (cart, id) => {
   return cartCopy;
 };
 
-const getTotalSum = (products) => {
-  let result = 0;
+const getTotalSum = (products) =>
+  Object.values(products).reduce((sum, item) => {
+    return (sum += item.price * item.count);
+  }, 0);
 
-  Object.values(products).forEach((item) => (result += item.price * item.count));
-
-  return result;
-};
-
-const getProductsCount = (products) => {
-  let result = 0;
-
-  Object.values(products).forEach((item) => (result += item.count));
-
-  return result;
-};
+const getProductsCount = (products) =>
+  Object.values(products).reduce((sum, item) => {
+    return (sum += item.count);
+  }, 0);

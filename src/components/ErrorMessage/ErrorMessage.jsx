@@ -2,7 +2,7 @@ import React from 'react';
 import { AttentionIcon } from '../Icons';
 import './ErrorMessage.scss';
 
-export default () => (
+const ErrorMessage = () => (
   <div className="error-message">
     <div className="error-message__icon">
       <AttentionIcon />
@@ -11,3 +11,5 @@ export default () => (
     <p>Please try again later</p>
   </div>
 );
+
+export default ErrorMessage;

@@ -14,3 +14,5 @@ export { default as Loader } from './Loader/Loader';
 export { default as Button } from './Button/Button';
 export { default as PopUp } from './PopUp/PopUp';
 export { default as ErrorMessage } from './ErrorMessage/ErrorMessage';
+
+export { default as CartContextProvider } from './CartContextProvider/CartContextProvider';

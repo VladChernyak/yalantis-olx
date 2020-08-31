@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Header.scss';
 
-const Header = ({ cart, location: { pathname } }) => (
+const Header = ({ location: { pathname } }) => (
   <header className="header">
     <Container>
       <div className="header__content">
@@ -13,7 +13,7 @@ const Header = ({ cart, location: { pathname } }) => (
         </Link>
         {pathname.includes('/cart') ? null : (
           <Link to="/cart">
-            <CartWidget {...cart} />
+            <CartWidget />
           </Link>
         )}
       </div>
@@ -22,8 +22,9 @@ const Header = ({ cart, location: { pathname } }) => (
 );
 
 Header.propTypes = {
-  cart: PropTypes.object,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
 };
 
 export default Header;

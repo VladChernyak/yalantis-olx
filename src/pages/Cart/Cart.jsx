@@ -4,7 +4,7 @@ import { CrossIcon } from '../../components/Icons';
 import CartContext from '../../context/CartContext';
 import './Cart.scss';
 
-export default () => {
+const Cart = () => {
   const { cart } = useContext(CartContext);
   const products = Object.entries(cart.products);
 
@@ -33,3 +33,5 @@ export default () => {
     </main>
   );
 };
+
+export default Cart;

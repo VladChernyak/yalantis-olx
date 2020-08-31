@@ -7,7 +7,7 @@ const ProductList = ({ products, pages, changePages, changePopUp }) => {
   return (
     <div className="product-list">
       <div className="product-list__inner">
-        {products ? (
+        {products.length ? (
           products.map(({ name, id, price, origin }) => (
             <ProductCard
               key={id}

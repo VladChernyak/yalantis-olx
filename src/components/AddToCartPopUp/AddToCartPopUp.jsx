@@ -5,7 +5,7 @@ import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import './AddToCartPopUp.scss';
 
-const AddToCartPopUp = ({ name, price, id, count, changePopUp, test }) => {
+const AddToCartPopUp = ({ name, price, id, count, changePopUp }) => {
   const { cart, changeCart } = useContext(CartContext);
 
   return (

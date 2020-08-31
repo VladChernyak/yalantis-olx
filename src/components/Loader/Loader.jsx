@@ -1,7 +1,7 @@
 import React from 'react';
 import './Loader.scss';
 
-export default () => (
+const Loader = () => (
   <div className="loader">
     <svg className="circular" viewBox="25 25 50 50">
       <circle
@@ -16,3 +16,5 @@ export default () => (
     </svg>
   </div>
 );
+
+export default Loader;

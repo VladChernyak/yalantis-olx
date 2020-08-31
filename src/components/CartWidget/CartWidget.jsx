@@ -3,7 +3,7 @@ import { CartIcon, ArrowRightIcon } from '../Icons';
 import CartContext from '../../context/CartContext';
 import './CartWidget.scss';
 
-export default () => {
+const CartWidget = () => {
   const {
     cart: { total, productsCount },
   } = useContext(CartContext);
@@ -29,3 +29,5 @@ export default () => {
     </div>
   );
 };
+
+export default CartWidget;

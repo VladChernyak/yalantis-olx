@@ -34,4 +34,8 @@ CartProduct.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
+CartProduct.defaultProps = {
+  name: 'No name',
+};
+
 export default CartProduct;

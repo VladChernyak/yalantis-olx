@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CheckIcon, AddToCartIcon } from '../Icons';
 import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import './ProductCard.scss';
 
 const ProductCard = ({ name, price, origin, id, changePopUp }) => {
@@ -10,8 +11,10 @@ const ProductCard = ({ name, price, origin, id, changePopUp }) => {
 
   const isInCart = cart.products[id];
 
+  const classes = classNames('product-card', { 'in-cart': isInCart });
+
   return (
-    <div className={'product-card' + (isInCart ? ' in-cart' : '')}>
+    <div className={classes}>
       <div className="product-card__info">
         <h3>
           <Link to={'/' + id}>{name}</Link>
@@ -40,6 +43,10 @@ ProductCard.propTypes = {
   origin: PropTypes.string,
   id: PropTypes.string.isRequired,
   changePopUp: PropTypes.func.isRequired,
+};
+
+ProductCard.defaultProps = {
+  name: 'No name',
 };
 
 export default ProductCard;
