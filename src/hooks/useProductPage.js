@@ -1,36 +1,44 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../assets/apiLinks';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendRequest } from '../api/request';
+import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
 import { setOriginName } from '../handlers/product';
-import { useRequestOptions } from './';
+import { selectProductPage } from '../store/selectors';
+import {
+  getProductByIdSuccsess,
+  getProductByIdError,
+  productPageReset,
+} from '../store/actions/productPage';
 
 const useProductPage = (productId) => {
-  const [productInfo, setInfo] = useState(null);
-  const { options, setOptions } = useRequestOptions();
+  const dispatch = useDispatch();
+  const { productInfo, loading, error } = useSelector(selectProductPage);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const product = await axios.get(`${PRODUCTS_LINK}/${productId}`);
-        const origins = await axios.get(PRODUCTS_ORIGINS_LINK);
+        const product = await sendRequest(`${PRODUCTS_LINK}/${productId}`);
+        const origins = await sendRequest(PRODUCTS_ORIGINS_LINK);
 
         const productWithOrigin = setOriginName(origins.data.items, product.data);
 
-        setInfo(productWithOrigin);
-        setOptions({ ...options, loading: false });
+        dispatch(getProductByIdSuccsess(productWithOrigin));
       } catch (e) {
-        setOptions({ ...options, loading: false, error: true });
+        dispatch(getProductByIdError());
       }
     };
 
     fetchProduct();
+
+    return () => dispatch(productPageReset());
 
     // eslint-disable-next-line
   }, []);
 
   return {
     productInfo,
-    options,
+    loading,
+    error,
   };
 };
 

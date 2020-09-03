@@ -6,6 +6,9 @@
   &__icon {
     color: $violet;
     min-width: 40px;
+    svg {
+      display: block;
+    }
   }
   &__name {
     font-weight: 700;

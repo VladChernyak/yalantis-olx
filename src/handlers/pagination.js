@@ -1,5 +1,6 @@
 export const createButtonNumbers = (currentPage, totalPages) => {
-  const buttonCount = 4,
+  const buttonCount = 5,
+    halfPages = Math.round(totalPages / 2),
     leftSide = [],
     rightSide = [];
 
@@ -7,14 +8,24 @@ export const createButtonNumbers = (currentPage, totalPages) => {
     for (let i = 1; i <= totalPages; i++) {
       leftSide.push(i);
     }
-  } else if (currentPage < totalPages / 2) {
-    for (let i = currentPage; i < currentPage + buttonCount; i++) {
+  } else if (currentPage < halfPages) {
+    const startPage = currentPage === 1 ? 1 : currentPage - 1;
+
+    for (let i = startPage; i < startPage + buttonCount; i++) {
       leftSide.push(i);
     }
 
     rightSide.push(totalPages);
   } else {
-    for (let i = totalPages - buttonCount + 1; i <= totalPages; i++) {
+    let startPage = currentPage - buttonCount + 1 > 1 ? currentPage - buttonCount + 1 : 2;
+    let lastPage = totalPages;
+
+    if (currentPage !== totalPages) {
+      lastPage = currentPage + 1;
+      startPage++;
+    }
+
+    for (let i = startPage; i <= lastPage; i++) {
       rightSide.push(i);
     }
 

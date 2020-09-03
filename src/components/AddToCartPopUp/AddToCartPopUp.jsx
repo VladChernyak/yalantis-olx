@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { PopUp, Button, Counter } from '../';
-import { addProducts } from '../../handlers/cart';
 import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import './AddToCartPopUp.scss';
 
 const AddToCartPopUp = ({ name, price, id, count, changePopUp }) => {
-  const { cart, changeCart } = useContext(CartContext);
+  const { changeProduct } = useContext(CartContext);
 
   return (
     <PopUp onCloseClick={() => changePopUp(null)}>
@@ -16,14 +15,12 @@ const AddToCartPopUp = ({ name, price, id, count, changePopUp }) => {
         <Counter value={count} setCounter={(v) => changePopUp({ name, price, id, count: v })} />
         <Button
           onClick={() => {
-            changeCart(
-              addProducts(cart, {
-                name,
-                price,
-                id,
-                count,
-              }),
-            );
+            changeProduct({
+              name,
+              price,
+              id,
+              count,
+            });
             changePopUp(null);
           }}>
           Add to cart

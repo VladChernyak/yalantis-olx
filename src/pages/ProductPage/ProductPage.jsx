@@ -2,24 +2,23 @@ import React, { Fragment, useContext } from 'react';
 import { Loader, Container, Counter, Button, ErrorMessage } from '../../components';
 import { CheckIcon } from '../../components/Icons';
 import { getDateTimeString } from '../../handlers/product';
-import { addProducts } from '../../handlers/cart';
 import { useProductPage, useCounter } from '../../hooks';
 import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import './ProductPage.scss';
 
 const ProductPage = ({ match }) => {
-  const { productInfo, options } = useProductPage(match.params.id);
+  const { productInfo, loading, error } = useProductPage(match.params.id);
   const { counter, setCounter } = useCounter();
 
-  const { cart, changeCart } = useContext(CartContext);
+  const { cart, changeProduct } = useContext(CartContext);
   const isInCart = productInfo ? cart.products[productInfo.id] : false;
 
   let content;
 
-  if (options.error) {
+  if (error) {
     content = <ErrorMessage />;
-  } else if (options.loading) {
+  } else if (loading) {
     content = <Loader />;
   } else {
     content = (
@@ -43,14 +42,12 @@ const ProductPage = ({ match }) => {
                 <Counter value={counter} setCounter={setCounter} />
                 <Button
                   onClick={() =>
-                    changeCart(
-                      addProducts(cart, {
-                        name: productInfo.name,
-                        id: productInfo.id,
-                        count: counter,
-                        price: productInfo.price,
-                      }),
-                    )
+                    changeProduct({
+                      name: productInfo.name,
+                      id: productInfo.id,
+                      count: counter,
+                      price: productInfo.price,
+                    })
                   }>
                   Add to cart
                 </Button>

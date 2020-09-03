@@ -1,45 +1,53 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useRequestOptions } from './';
-import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../assets/apiLinks';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { sendRequest } from '../api/request';
+import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
 import { setOriginName } from '../handlers/product';
+import { selectProductList } from '../store/selectors';
+import {
+  getProductListSuccess,
+  getProductListError,
+  setProductOrigins,
+  productListReset,
+} from '../store/actions/productList';
 
 const useProductList = () => {
-  const [productList, setProductList] = useState([]);
-  const [pages, changePages] = useState({ current: 1, total: 0 });
-  const { options, setOptions } = useRequestOptions();
+  const dispatch = useDispatch();
+  const { products, loading, error, totalPages, origins, queries } = useSelector(selectProductList);
 
   useEffect(() => {
     const fetchProductList = async () => {
-      setOptions({ ...options, loading: true });
-
       try {
-        const productList = await axios.get(`${PRODUCTS_LINK}?page=${pages.current}`);
-        const origins = await axios.get(PRODUCTS_ORIGINS_LINK);
+        const productList = await sendRequest(`${PRODUCTS_LINK}`, queries);
+        const origins = await sendRequest(PRODUCTS_ORIGINS_LINK);
+
+        dispatch(setProductOrigins(origins.data.items));
 
         const productsWithOrigin = productList.data.items.map((product) =>
           setOriginName(origins.data.items, product),
         );
         const totalPages = Math.ceil(productList.data.totalItems / productList.data.perPage);
 
-        setProductList(productsWithOrigin);
-        changePages({ ...pages, total: totalPages });
-        setOptions({ ...options, loading: false });
+        dispatch(getProductListSuccess(productsWithOrigin, totalPages));
       } catch (e) {
-        setOptions({ ...options, loading: false, error: true });
+        dispatch(getProductListError());
       }
     };
 
     fetchProductList();
 
+    return () => dispatch(productListReset());
+
     // eslint-disable-next-line
-  }, [pages.current]);
+  }, [queries]);
 
   return {
-    productList,
-    pages,
-    changePages,
-    options,
+    products,
+    loading,
+    error,
+    totalPages,
+    origins,
+    queries,
   };
 };
 

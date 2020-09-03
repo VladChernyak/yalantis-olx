@@ -1,27 +1,39 @@
 import React, { useState } from 'react';
-import { Container, ProductList, Loader, AddToCartPopUp, ErrorMessage } from '../../components';
+import {
+  Container,
+  ProductList,
+  SortBar,
+  Loader,
+  AddToCartPopUp,
+  ErrorMessage,
+} from '../../components';
 import { useProductList } from '../../hooks';
+import { PAGE } from '../../api/queries';
 import './Products.scss';
 
 const Products = () => {
-  const { productList, pages, changePages, options } = useProductList();
+  const { products, loading, error, queries, origins, totalPages } = useProductList();
 
   const [popUp, changePopUp] = useState(null);
 
   let content;
 
-  if (options.error) {
+  if (error) {
     content = <ErrorMessage />;
-  } else if (options.loading) {
+  } else if (loading) {
     content = <Loader />;
   } else {
     content = (
-      <ProductList
-        changePopUp={changePopUp}
-        products={productList}
-        pages={pages}
-        changePages={changePages}
-      />
+      <>
+        <SortBar origins={origins} queries={queries} />
+        <ProductList
+          changePopUp={changePopUp}
+          products={products}
+          currentPage={queries[PAGE]}
+          totalPages={totalPages}
+          origins={origins}
+        />
+      </>
     );
   }
 

@@ -1,23 +1,26 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-const PaginationSide = ({ numbers, pagesOptions, changePages }) => (
-  <div className="pagination__side">
-    {numbers.map((num) => (
-      <button
-        onClick={() => changePages({ ...pagesOptions, current: num })}
-        key={num}
-        className={num === pagesOptions.current ? 'current' : ''}>
-        {num}
-      </button>
-    ))}
-  </div>
-);
+const PaginationSide = ({ numbers, currentPage, setPage }) => {
+  return (
+    <div className="pagination__side">
+      {numbers.map((num) => (
+        <button
+          onClick={() => setPage(num)}
+          key={num}
+          className={classNames('pagination__page-btn', { current: num === currentPage })}>
+          {num}
+        </button>
+      ))}
+    </div>
+  );
+};
 
 PaginationSide.propTypes = {
   numbers: PropTypes.array.isRequired,
-  pagesOptions: PropTypes.object.isRequired,
-  changePages: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 export default PaginationSide;

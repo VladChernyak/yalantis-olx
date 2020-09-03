@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import { Counter } from '../';
 import { TrashIcon } from '../Icons';
 import CartContext from '../../context/CartContext';
-import { addProducts, deleteProduct } from '../../handlers/cart';
 import PropTypes from 'prop-types';
 import './CartProduct.scss';
 
 const CartProduct = ({ name, id, price, count }) => {
-  const { cart, changeCart } = useContext(CartContext);
+  const { changeProduct, deleteProduct } = useContext(CartContext);
 
   return (
     <li className="cart-product">
@@ -15,12 +14,9 @@ const CartProduct = ({ name, id, price, count }) => {
         <h3 className="cart-product__name">{name}</h3>
         <span className="cart-product__id">{id}</span>
       </div>
-      <Counter
-        value={count}
-        setCounter={(v) => changeCart(addProducts(cart, { name, id, price, count: v }))}
-      />
+      <Counter value={count} setCounter={(v) => changeProduct({ name, id, price, count: v })} />
       <div className="cart-product__total-price">{price * count} $</div>
-      <button className="cart-product__remove" onClick={() => changeCart(deleteProduct(cart, id))}>
+      <button className="cart-product__remove" onClick={() => deleteProduct(id)}>
         <TrashIcon />
       </button>
     </li>
