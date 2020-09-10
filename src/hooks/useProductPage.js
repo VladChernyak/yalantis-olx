@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendRequest } from '../api/request';
 import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
 import { setOriginName } from '../handlers/product';
-import { selectProductPage } from '../store/selectors';
+import { selectProductPage } from '../pages/ProductPage/selectors';
 import {
   getProductByIdSuccsess,
   getProductByIdError,
   productPageReset,
-} from '../store/actions/productPage';
+} from '../pages/ProductPage/actions';
 
 const useProductPage = (productId) => {
   const dispatch = useDispatch();

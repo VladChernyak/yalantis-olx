@@ -1,8 +1,4 @@
-import {
-  GET_PRODUCT_BY_ID_SUCCSESS,
-  GET_PRODUCT_BY_ID_ERROR,
-  PRODUCT_PAGE_RESET,
-} from '../actions/actionTypes';
+import { PRODUCT_BY_ID_SUCCSESS, PRODUCT_BY_ID_FAILURE, PRODUCT_BY_ID_RESET } from './actionTypes';
 
 const initialState = {
   productInfo: {},
@@ -12,11 +8,11 @@ const initialState = {
 
 const productPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_PRODUCT_BY_ID_SUCCSESS:
+    case PRODUCT_BY_ID_SUCCSESS:
       return { ...state, loading: false, productInfo: action.payload.data };
-    case GET_PRODUCT_BY_ID_ERROR:
+    case PRODUCT_BY_ID_FAILURE:
       return { ...state, loading: false, error: true };
-    case PRODUCT_PAGE_RESET:
+    case PRODUCT_BY_ID_RESET:
       return { ...state, loading: true, error: false };
     default:
       return state;

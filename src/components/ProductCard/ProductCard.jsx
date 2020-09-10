@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CheckIcon, AddToCartIcon } from '../Icons';
-import CartContext from '../../context/CartContext';
+import { selectCart } from '../../pages/Cart/selectors';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './ProductCard.scss';
 
 const ProductCard = ({ name, price, origin, id, changePopUp }) => {
-  const { cart } = useContext(CartContext);
+  const cart = useSelector(selectCart);
 
   const isInCart = cart.products[id];
 

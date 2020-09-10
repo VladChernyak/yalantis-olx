@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendRequest } from '../api/request';
 import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
 import { setOriginName } from '../handlers/product';
-import { selectProductList } from '../store/selectors';
+import { selectProductList } from '../pages/Products/selectors';
 import {
   getProductListSuccess,
   getProductListError,
   setProductOrigins,
   productListReset,
-} from '../store/actions/productList';
+} from '../pages/Products/actions';
 
 const useProductList = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const useProductList = () => {
   useEffect(() => {
     const fetchProductList = async () => {
       try {
-        const productList = await sendRequest(`${PRODUCTS_LINK}`, queries);
+        const productList = await sendRequest(PRODUCTS_LINK, queries);
         const origins = await sendRequest(PRODUCTS_ORIGINS_LINK);
 
         dispatch(setProductOrigins(origins.data.items));
@@ -30,6 +30,7 @@ const useProductList = () => {
 
         dispatch(getProductListSuccess(productsWithOrigin, totalPages));
       } catch (e) {
+        console.log(e);
         dispatch(getProductListError());
       }
     };

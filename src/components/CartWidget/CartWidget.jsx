@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectCart } from '../../pages/Cart/selectors';
 import { CartIcon, ArrowRightIcon } from '../Icons';
-import CartContext from '../../context/CartContext';
 import './CartWidget.scss';
 
 const CartWidget = () => {
-  const {
-    cart: { total, productsCount },
-  } = useContext(CartContext);
+  const { total, productsCount } = useSelector(selectCart);
 
   return (
     <div className="cart-widget__wrapper">

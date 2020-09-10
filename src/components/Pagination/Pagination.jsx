@@ -3,8 +3,8 @@ import { PaginationSide } from '../';
 import { ChevroneIcon } from '../Icons';
 import { createButtonNumbers } from '../../handlers/pagination';
 import { useDispatch } from 'react-redux';
-import { setProductListQuery } from '../../store/actions/productList';
-import { PAGE } from '../../api/queries';
+import { setProductListQuery } from '../../pages/Products/actions';
+import { PAGE } from '../../constants/queries';
 import PropTypes from 'prop-types';
 import './Pagination.scss';
 
@@ -13,6 +13,8 @@ const Pagination = ({ currentPage, totalPages }) => {
   const dispatch = useDispatch();
 
   const setPage = (num) => dispatch(setProductListQuery({ [PAGE]: num }));
+  const goPreviousPage = () => setPage(currentPage - 1);
+  const goNextPage = () => setPage(currentPage + 1);
 
   return (
     <div className="pagination">
@@ -20,7 +22,7 @@ const Pagination = ({ currentPage, totalPages }) => {
         <button
           className="pagination__arrow-left pagination__arrow"
           disabled={currentPage === 1}
-          onClick={() => setPage(currentPage - 1)}>
+          onClick={goPreviousPage}>
           <ChevroneIcon />
         </button>
         <PaginationSide
@@ -39,7 +41,7 @@ const Pagination = ({ currentPage, totalPages }) => {
         <button
           className="pagination__arrow-right pagination__arrow"
           disabled={currentPage === totalPages}
-          onClick={() => setPage(currentPage + 1)}>
+          onClick={goNextPage}>
           <ChevroneIcon />
         </button>
       </div>

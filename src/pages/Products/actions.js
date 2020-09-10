@@ -1,10 +1,10 @@
 import {
-  GET_PRODUCT_LIST_SUCCSESS,
-  GET_PRODUCT_LIST_ERROR,
+  PRODUCT_LIST_SUCCSESS,
+  PRODUCT_LIST_FAILURE,
   PRODUCT_LIST_RESET,
-  SET_PRODUCT_LIST_QUERY,
-  SET_PRODUCT_ORIGINS,
-  RESET_PRODUCT_LIST_QUERIES,
+  PRODUCT_LIST_QUERIES_SET,
+  PRODUCT_ORIGINS_REQUEST,
+  PRODUCT_LIST_QUERIES_RESET,
 } from './actionTypes';
 
 export const productListReset = () => ({
@@ -12,24 +12,24 @@ export const productListReset = () => ({
 });
 
 export const getProductListSuccess = (products, totalPages) => ({
-  type: GET_PRODUCT_LIST_SUCCSESS,
+  type: PRODUCT_LIST_SUCCSESS,
   payload: { products, totalPages },
 });
 
 export const getProductListError = () => ({
-  type: GET_PRODUCT_LIST_ERROR,
+  type: PRODUCT_LIST_FAILURE,
 });
 
 export const setProductOrigins = (origins) => ({
-  type: SET_PRODUCT_ORIGINS,
+  type: PRODUCT_ORIGINS_REQUEST,
   payload: { origins },
 });
 
 export const setProductListQuery = (queries) => ({
-  type: SET_PRODUCT_LIST_QUERY,
+  type: PRODUCT_LIST_QUERIES_SET,
   payload: { ...queries },
 });
 
 export const resetProductListQueries = () => ({
-  type: RESET_PRODUCT_LIST_QUERIES,
+  type: PRODUCT_LIST_QUERIES_RESET,
 });

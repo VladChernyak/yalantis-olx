@@ -1,9 +1,11 @@
-import React, { Fragment, useContext } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Loader, Container, Counter, Button, ErrorMessage } from '../../components';
 import { CheckIcon } from '../../components/Icons';
 import { getDateTimeString } from '../../handlers/product';
 import { useProductPage, useCounter } from '../../hooks';
-import CartContext from '../../context/CartContext';
+import { selectCart } from '../Cart/selectors';
+import { changeCart } from '../Cart/actions';
 import PropTypes from 'prop-types';
 import './ProductPage.scss';
 
@@ -11,8 +13,21 @@ const ProductPage = ({ match }) => {
   const { productInfo, loading, error } = useProductPage(match.params.id);
   const { counter, setCounter } = useCounter();
 
-  const { cart, changeProduct } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCart);
+
   const isInCart = productInfo ? cart.products[productInfo.id] : false;
+
+  const addProductToCart = () => {
+    dispatch(
+      changeCart({
+        name: productInfo.name,
+        id: productInfo.id,
+        count: counter,
+        price: productInfo.price,
+      }),
+    );
+  };
 
   let content;
 
@@ -32,7 +47,7 @@ const ProductPage = ({ match }) => {
                 In cart !
               </div>
             ) : (
-              <Fragment>
+              <>
                 <div className="product__price">
                   Price for one: <span>{productInfo.price} $</span>
                 </div>
@@ -40,18 +55,8 @@ const ProductPage = ({ match }) => {
                   (total: <span>{productInfo.price * counter} $</span>)
                 </div>
                 <Counter value={counter} setCounter={setCounter} />
-                <Button
-                  onClick={() =>
-                    changeProduct({
-                      name: productInfo.name,
-                      id: productInfo.id,
-                      count: counter,
-                      price: productInfo.price,
-                    })
-                  }>
-                  Add to cart
-                </Button>
-              </Fragment>
+                <Button onClick={addProductToCart}>Add to cart</Button>
+              </>
             )}
           </div>
           <div className="product__info">

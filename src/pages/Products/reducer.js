@@ -1,12 +1,12 @@
-import { PAGE } from '../../api/queries';
+import { PAGE } from '../../constants/queries';
 import {
   PRODUCT_LIST_RESET,
-  GET_PRODUCT_LIST_SUCCSESS,
-  GET_PRODUCT_LIST_ERROR,
-  SET_PRODUCT_LIST_QUERY,
-  SET_PRODUCT_ORIGINS,
-  RESET_PRODUCT_LIST_QUERIES,
-} from '../actions/actionTypes';
+  PRODUCT_LIST_SUCCSESS,
+  PRODUCT_LIST_FAILURE,
+  PRODUCT_LIST_QUERIES_SET,
+  PRODUCT_ORIGINS_REQUEST,
+  PRODUCT_LIST_QUERIES_RESET,
+} from './actionTypes';
 
 const initialState = {
   products: [],
@@ -21,20 +21,20 @@ const initialState = {
 
 const productListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_PRODUCT_LIST_SUCCSESS:
+    case PRODUCT_LIST_SUCCSESS:
       return {
         ...state,
         loading: false,
         products: action.payload.products,
         totalPages: action.payload.totalPages,
       };
-    case GET_PRODUCT_LIST_ERROR:
+    case PRODUCT_LIST_FAILURE:
       return { ...state, loading: false, error: true };
-    case SET_PRODUCT_LIST_QUERY:
+    case PRODUCT_LIST_QUERIES_SET:
       return { ...state, queries: { ...state.queries, ...action.payload } };
-    case RESET_PRODUCT_LIST_QUERIES:
+    case PRODUCT_LIST_QUERIES_RESET:
       return { ...state, queries: { [PAGE]: 1 } };
-    case SET_PRODUCT_ORIGINS:
+    case PRODUCT_ORIGINS_REQUEST:
       return { ...state, origins: action.payload.origins };
     case PRODUCT_LIST_RESET:
       return { ...state, loading: true, error: false };

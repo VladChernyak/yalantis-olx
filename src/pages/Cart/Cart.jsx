@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Container, CartProduct } from '../../components';
 import { CrossIcon } from '../../components/Icons';
-import CartContext from '../../context/CartContext';
+import { selectCart } from './selectors';
 import './Cart.scss';
 
 const Cart = () => {
-  const { cart } = useContext(CartContext);
+  const cart = useSelector(selectCart);
   const products = Object.entries(cart.products);
 
   return (

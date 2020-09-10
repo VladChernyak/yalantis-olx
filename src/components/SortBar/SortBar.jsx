@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '../';
-import { PAGE, ORIGINS, MIN_PRICE, MAX_PRICE, PER_PAGE } from '../../api/queries';
+import { PAGE, ORIGINS, MIN_PRICE, MAX_PRICE, PER_PAGE } from '../../constants/queries';
 import { useDispatch } from 'react-redux';
-import { setProductListQuery } from '../../store/actions/productList';
+import { setProductListQuery } from '../../pages/Products/actions';
 import PropTypes from 'prop-types';
 import './SortBar.scss';
 
@@ -18,6 +18,17 @@ const SortBar = ({ origins, queries }) => {
   const [perPage, setPerPage] = useState(perPageFromState);
 
   const dispatch = useDispatch();
+
+  const confirmQueries = () =>
+    dispatch(
+      setProductListQuery({
+        [PAGE]: 1,
+        [ORIGINS]: checkedOrigins.join(','),
+        [MAX_PRICE]: maxPrice,
+        [MIN_PRICE]: minPrice,
+        [PER_PAGE]: perPage,
+      }),
+    );
 
   return (
     <div className="sort-bar">
@@ -76,20 +87,7 @@ const SortBar = ({ origins, queries }) => {
             <option value="50">50</option>
           </select>
         </div>
-        <Button
-          onClick={() =>
-            dispatch(
-              setProductListQuery({
-                [PAGE]: 1,
-                [ORIGINS]: checkedOrigins.join(','),
-                [MAX_PRICE]: maxPrice,
-                [MIN_PRICE]: minPrice,
-                [PER_PAGE]: perPage,
-              }),
-            )
-          }>
-          Confirm
-        </Button>
+        <Button onClick={confirmQueries}>Confirm</Button>
       </div>
     </div>
   );

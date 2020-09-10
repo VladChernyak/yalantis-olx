@@ -1,18 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { changeCart } from '../../pages/Cart/actions';
 import { PopUp, Button, Counter } from '../';
-import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import './AddToCartPopUp.scss';
 
 const AddToCartPopUp = ({ name, price, id, count, changePopUp }) => {
-  const { changeProduct } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const changeProduct = (productData) => dispatch(changeCart(productData));
 
   return (
     <PopUp onCloseClick={() => changePopUp(null)}>
       <div className="products__pop-up">
         <h2>{name}</h2>
         <p>{price * count} $</p>
-        <Counter value={count} setCounter={(v) => changePopUp({ name, price, id, count: v })} />
+        <Counter
+          value={count}
+          setCounter={(value) => changePopUp({ name, price, id, count: value })}
+        />
         <Button
           onClick={() => {
             changeProduct({

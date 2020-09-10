@@ -1,11 +1,11 @@
-import { CHANGE_PRODUCT_IN_CART, DELETE_PRODUCT_FROM_CART } from './actionTypes';
+import { CART_CHANGE, CART_DELETE_PRODUCT } from './actionTypes';
 
 export const changeCart = (productData) => ({
-  type: CHANGE_PRODUCT_IN_CART,
+  type: CART_CHANGE,
   payload: { data: productData },
 });
 
 export const deleteProductFromCart = (productId) => ({
-  type: DELETE_PRODUCT_FROM_CART,
+  type: CART_DELETE_PRODUCT,
   payload: { id: productId },
 });

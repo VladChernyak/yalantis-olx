@@ -1,5 +1,5 @@
 import { addProducts, deleteProduct } from '../../handlers/cart';
-import { CHANGE_PRODUCT_IN_CART, DELETE_PRODUCT_FROM_CART } from '../actions/actionTypes';
+import { CART_CHANGE, CART_DELETE_PRODUCT } from './actionTypes';
 
 const initialState = {
   products: {},
@@ -9,9 +9,9 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_PRODUCT_IN_CART:
+    case CART_CHANGE:
       return addProducts(state, action.payload.data);
-    case DELETE_PRODUCT_FROM_CART:
+    case CART_DELETE_PRODUCT:
       return deleteProduct(state, action.payload.id);
     default:
       return state;

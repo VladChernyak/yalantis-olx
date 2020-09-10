@@ -8,7 +8,7 @@ import {
   ErrorMessage,
 } from '../../components';
 import { useProductList } from '../../hooks';
-import { PAGE } from '../../api/queries';
+import { PAGE } from '../../constants/queries';
 import './Products.scss';
 
 const Products = () => {
