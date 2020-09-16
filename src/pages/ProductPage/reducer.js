@@ -1,4 +1,8 @@
-import { PRODUCT_BY_ID_SUCCSESS, PRODUCT_BY_ID_FAILURE, PRODUCT_BY_ID_RESET } from './actionTypes';
+import {
+  PRODUCT_BY_ID_SUCCSESS,
+  PRODUCT_BY_ID_FAILURE,
+  PRODUCT_BY_ID_RESET,
+} from './actionTypes';
 
 const initialState = {
   productInfo: {},

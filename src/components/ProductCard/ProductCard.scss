@@ -10,9 +10,11 @@
   background-color: #fff;
   box-shadow: $default-shadow;
   overflow: hidden;
-  transition: 0.2s;
   &.in-cart {
     border-top: 15px solid $green;
+  }
+  &.my-product {
+    border-color: $coral;
   }
   h3 a {
     color: #000;
@@ -26,8 +28,11 @@
     margin-right: 4%;
   }
   &:hover {
-    .add-to-cart {
-      transform: translateY(0);
+    .product-card {
+      &__add-to-cart,
+      &__edit {
+        transform: translateY(0);
+      }
     }
   }
   &__info {
@@ -46,14 +51,16 @@
     margin-top: 10px;
     font-size: 18px;
   }
-  .check-icon {
+  button.product-card__add-to-cart,
+  button.product-card__edit {
     position: absolute;
     width: 30px;
-    bottom: 10px;
-    right: 10px;
-    color: $green;
-  }
-  .add-to-cart {
+    height: 30px;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+    transform: translateY(40px);
     &:hover {
       transform: scale(1.2);
     }
@@ -62,31 +69,36 @@
       transform: none;
       opacity: 0.7;
     }
+    svg {
+      display: inline-block;
+      width: 20px;
+      color: #fff;
+    }
   }
-}
+  &__add-to-cart {
+    bottom: 10px;
+    right: 10px;
+    background-color: $violet;
+  }
+  &__edit {
+    bottom: 10px;
+    left: 10px;
+    background-color: $coral;
+  }
 
-.add-to-cart {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  line-height: 40px;
-  border-radius: 50%;
-  background-color: $violet;
-  transition: 0.3s;
-  cursor: pointer;
-  transform: translateY(40px);
-  .add-to-cart-icon {
-    display: inline-block;
-    width: 20px;
-    color: #fff;
+  .check-icon {
+    position: absolute;
+    width: 30px;
+    bottom: 10px;
+    right: 10px;
+    color: $green;
   }
 }
 
 @media (max-width: 1025px) {
   .product-card {
-    .add-to-cart {
+    &__add-to-cart,
+    &__edit {
       transform: none;
     }
   }
@@ -109,11 +121,12 @@
 
 @media (max-width: 768px) {
   .product-card {
-    .add-to-cart {
+    &__add-to-cart,
+    &__edit {
       border-radius: 15px;
       width: 4em;
     }
-    .add-to-cart,
+    &__add-to-cart,
     .in-cart-icon {
       position: static;
       margin-top: 10px;

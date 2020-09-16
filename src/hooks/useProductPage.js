@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { sendRequest } from '../api/request';
+import { sendRequest } from '../api/requests';
 import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
 import { setOriginName } from '../handlers/product';
 import { selectProductPage } from '../pages/ProductPage/selectors';
+import { selectProductModal } from '../pages/ProductModal/selectors';
 import {
   getProductByIdSuccsess,
   getProductByIdError,
@@ -12,7 +13,8 @@ import {
 
 const useProductPage = (productId) => {
   const dispatch = useDispatch();
-  const { productInfo, loading, error } = useSelector(selectProductPage);
+  const { productInfo, loading, error, updated } = useSelector(selectProductPage);
+  const { success } = useSelector(selectProductModal);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,12 +35,13 @@ const useProductPage = (productId) => {
     return () => dispatch(productPageReset());
 
     // eslint-disable-next-line
-  }, []);
+  }, [productId, success]);
 
   return {
     productInfo,
     loading,
     error,
+    updated,
   };
 };
 

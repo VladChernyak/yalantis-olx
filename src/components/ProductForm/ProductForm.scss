@@ -1,0 +1,31 @@
+@import '../../assets/variables';
+
+.product-form {
+  h1 {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  &__reset {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: $red;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  &__btn {
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+  }
+  &__origins {
+    margin-top: 15px;
+    font-size: 16px;
+    select {
+      width: 100%;
+    }
+  }
+}

@@ -1,27 +1,28 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Header } from './components';
-import { Products, ProductPage, Cart } from './pages';
+import { Products, ProductPage, Cart, ProductModal, Orders, OrderPage } from './pages';
+import { selectProductModal } from './pages/ProductModal/selectors';
 import { Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
 import './App.scss';
 
-function App() {
+const App = () => {
+  const { isOpen } = useSelector(selectProductModal);
+
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <div className="App">
-          <Route path="/" component={Header} />
-          <Switch>
-            <Route path="/cart" component={Cart} />
-            <Route path="/:id" component={ProductPage} />
-            <Route path="/" component={Products} />
-          </Switch>
-        </div>
-      </Provider>
-    </BrowserRouter>
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route path="/orders/:id" component={OrderPage} />
+        <Route path="/orders" component={Orders} />
+        <Route path="/my-products" component={Products} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/:id" component={ProductPage} />
+        <Route path="/" component={Products} />
+      </Switch>
+      {isOpen ? <ProductModal /> : null}
+    </div>
   );
-}
+};
 
 export default App;

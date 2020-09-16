@@ -49,29 +49,12 @@
     }
   }
   &__prices {
-    label {
-      display: block;
-    }
-    input {
+    &-input {
       display: block;
       max-width: 100px;
-      border: 1px solid $light-grey;
-      outline: none;
-      border-radius: 15px;
-      padding: 5px 10px;
-      -moz-appearance: textfield;
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
+      &:not(:last-child) {
+        margin-bottom: 10px;
       }
-    }
-  }
-  &__per-page {
-    &-select {
-      border: 1px solid $light-grey;
-      outline: none;
-      border-radius: 15px;
-      padding: 5px;
     }
   }
   .button {

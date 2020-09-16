@@ -1,0 +1,22 @@
+@import '../../assets/mixins';
+
+.form-input {
+  position: relative;
+  padding-bottom: 18px;
+  &__error {
+    @include error-text;
+  }
+  .input {
+    position: relative;
+    z-index: 1;
+    input {
+      padding: 10px;
+      transition: 0.2s;
+    }
+    &.error {
+      input {
+        @include error-field;
+      }
+    }
+  }
+}

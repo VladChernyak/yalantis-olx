@@ -1,0 +1,43 @@
+@import './variables';
+
+@mixin error-text {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  color: $red;
+  bottom: 0;
+  font-size: 12px;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  opacity: 0;
+  animation: error 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@mixin field {
+  border: 1px solid $light-grey;
+  outline: none;
+  border-radius: 15px;
+}
+
+@mixin error-field {
+  border-color: $red;
+  background-color: rgb(255, 208, 208);
+}
+
+@mixin modal-info {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+@keyframes error {
+  100% {
+    transform: translate(-50%);
+    opacity: 1;
+  }
+}

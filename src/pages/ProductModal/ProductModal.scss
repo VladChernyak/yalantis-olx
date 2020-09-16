@@ -1,0 +1,12 @@
+@import '../../assets/variables';
+
+.product-modal {
+  position: relative;
+  padding: 25px;
+  .modal-error {
+    padding-top: 100px;
+  }
+  .modal-success {
+    padding-top: 80px;
+  }
+}

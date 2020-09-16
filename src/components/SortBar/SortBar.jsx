@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from '../';
+import { Button, Input, Select } from '../';
 import { PAGE, ORIGINS, MIN_PRICE, MAX_PRICE, PER_PAGE } from '../../constants/queries';
 import { useDispatch } from 'react-redux';
 import { setProductListQuery } from '../../pages/Products/actions';
+import { perPageValues } from '../../constants/perPage';
 import PropTypes from 'prop-types';
 import './SortBar.scss';
 
@@ -58,34 +59,29 @@ const SortBar = ({ origins, queries }) => {
         <div className="sort-bar__prices sort-bar__filter">
           <div className="sort-bar__filter-title">Prices</div>
           <div className="sort-bar__prices-div">
-            <label>
-              Min price:
-              <input
-                type="number"
-                value={minPrice}
-                onChange={({ target: { value } }) => setMinPrice(value)}
-              />
-            </label>
-            <label>
-              Max price:
-              <input
-                type="number"
-                value={maxPrice}
-                onChange={({ target: { value } }) => setMaxPrice(value)}
-              />
-            </label>
+            <Input
+              type="number"
+              className="sort-bar__prices-input"
+              value={minPrice}
+              onChange={({ target: { value } }) => setMinPrice(value)}
+              label="Min price:"
+            />
+            <Input
+              type="number"
+              className="sort-bar__prices-input"
+              value={maxPrice}
+              onChange={({ target: { value } }) => setMaxPrice(value)}
+              label="Max price:"
+            />
           </div>
         </div>
         <div className="sort-bar__per-page sort-bar__filter">
           <div className="sort-bar__filter-title">Products per page</div>
-          <select
-            className="sort-bar__per-page-select"
+          <Select
             value={perPage}
-            onChange={({ target: { value } }) => setPerPage(value)}>
-            <option value="10">10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-          </select>
+            onChange={({ target: { value } }) => setPerPage(value)}
+            options={perPageValues.map((val) => [val, val])}
+          />
         </div>
         <Button onClick={confirmQueries}>Confirm</Button>
       </div>

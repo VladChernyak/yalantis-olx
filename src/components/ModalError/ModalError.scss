@@ -1,0 +1,12 @@
+@import '../../assets/mixins';
+
+.modal-error {
+  @include modal-info;
+  background-color: #fff;
+  h2 {
+    margin-bottom: 15px;
+  }
+  p {
+    margin-bottom: 15px;
+  }
+}

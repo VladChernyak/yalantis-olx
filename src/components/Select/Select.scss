@@ -1,0 +1,6 @@
+@import '../../assets/mixins';
+
+.select {
+  @include field;
+  padding: 2px 5px;
+}
