@@ -13,7 +13,6 @@ const initialState = {
   success: false,
   error: false,
   productData: null,
-  updatedProduct: null,
 };
 
 const addNewProductReducer = (state = initialState, action) => {
