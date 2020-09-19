@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../';
 import { getOrderTotalPrice } from '../../handlers/order';
 import { getDateTimeString } from '../../handlers/product';
+import { ORDERS_PATH } from '../../constants/paths';
 import PropTypes from 'prop-types';
 import './OrderItem.scss';
 
@@ -20,7 +21,7 @@ const OrderItem = ({ createdAt, id, pieces }) => (
       <div className="order-item__subtitle">Order price:</div>
       {getOrderTotalPrice(pieces)} $
     </div>
-    <Link to={'/orders/' + id}>
+    <Link to={ORDERS_PATH + '/' + id}>
       <Button>More...</Button>
     </Link>
   </li>

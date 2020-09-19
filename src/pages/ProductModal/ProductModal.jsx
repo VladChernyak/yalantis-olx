@@ -22,8 +22,8 @@ const ProductModal = () => {
     <Modal title={title} onCloseClick={onCloseClick}>
       <div className="product-modal">
         <ProductForm {...productData} />
-        {submitting ? <ModalSubmitting /> : null}
-        {success ? (
+        {submitting && <ModalSubmitting />}
+        {success && (
           <ModalSuccess
             title={successTitle}
             path={success.id}
@@ -32,8 +32,8 @@ const ProductModal = () => {
               resetModal();
             }}
           />
-        ) : null}
-        {error ? <ModalError error={error} onClick={resetModal} /> : null}
+        )}
+        {error && <ModalError error={error} onClick={resetModal} />}
       </div>
     </Modal>
   );

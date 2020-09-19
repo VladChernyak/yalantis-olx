@@ -41,11 +41,11 @@ const ProductForm = ({ name, price, origin, id }) => {
               value={origin}
               options={origins.map(({ value, displayName }) => [value, displayName])}
             />
-            {name ? (
+            {name && (
               <button className="product-form__reset" type="button" onClick={resetForm}>
                 Reset changes
               </button>
-            ) : null}
+            )}
             <Button className="product-form__btn" type="submit">
               {submitButtonText}
             </Button>

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PRODUCT_LIST_PATH } from '../../constants/paths';
 import PropTypes from 'prop-types';
 import './OrderProduct.scss';
 
 const OrderProduct = ({ id, name, price, count }) => (
   <li key={id} className="order-product">
-    <Link to={'/' + id}>
+    <Link to={PRODUCT_LIST_PATH + id}>
       <h3>{name}</h3>
     </Link>
     <div className="order-product__description">

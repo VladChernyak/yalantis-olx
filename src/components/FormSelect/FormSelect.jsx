@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 import './FormSelect.scss';
 
 const FormSelect = ({ className, options, placeholder, name, value }) => {
-  const [field, meta] = useField(name, value);
+  const [field, { touched, error }] = useField(name, value);
 
   return (
     <div className={classNames('form-select', { [className]: className })}>
       <Select
         placeholder={placeholder}
         options={options}
-        className={meta.error && meta.touched ? 'error' : ''}
+        className={error && touched ? 'error' : ''}
         {...field}
       />
-      {meta.error && meta.touched ? <div className="form-select__error">{meta.error}</div> : null}
+      {error && touched ? <div className="form-select__error">{error}</div> : null}
     </div>
   );
 };

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import './FormInput.scss';
 
 const FormInput = ({ label, name, type }) => {
-  const [field, meta] = useField(name);
+  const [field, { touched, error }] = useField(name);
 
   return (
     <div className="form-input">
@@ -14,9 +14,9 @@ const FormInput = ({ label, name, type }) => {
         label={label}
         type={type}
         {...field}
-        className={classNames({ error: meta.error && meta.touched })}
+        className={classNames({ error: error && touched })}
       />
-      {meta.touched && meta.error ? <div className="form-input__error">{meta.error}</div> : null}
+      {touched && error ? <div className="form-input__error">{error}</div> : null}
     </div>
   );
 };
