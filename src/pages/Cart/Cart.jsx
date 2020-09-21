@@ -1,22 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container, CartProduct } from '../../components';
-import { CrossIcon } from '../../components/Icons';
+import { Container, CartProduct, Button, ToOrderModal } from '../../components';
+import { CrossIcon, CartIcon } from '../../components/Icons';
 import { selectCart } from './selectors';
+import { useSendOrder } from '../../hooks';
+import { createOrderData } from '../../handlers/cart';
 import './Cart.scss';
 
 const Cart = () => {
-  const cart = useSelector(selectCart);
-  const products = Object.entries(cart.products);
+  const { products, total } = useSelector(selectCart);
+  const productsArray = Object.entries(products);
+
+  const { sending, sendingSuccess, sendingError, createOrder, sendOrder, toggleCreateOrder } = useSendOrder();
+
+  const sendOrderData = () => sendOrder(createOrderData(products));
+
 
   return (
     <main className="cart">
       <Container>
         <div className="cart__inner">
           <h1 className="cart__title">Cart</h1>
-          {products.length ? (
+          {productsArray.length ? (
             <ul className="cart__products">
-              {products.map(([id, product]) => (
+              {productsArray.map(([id, product]) => (
                 <CartProduct key={id} id={id} {...product} />
               ))}
             </ul>
@@ -26,11 +33,26 @@ const Cart = () => {
               <p>Cart is empty</p>
             </div>
           )}
-          <div className="cart__total-payable">
-            Total payable: <span>{cart.total} $</span>
+          <div className="cart__to-order">
+            {productsArray.length ? (
+              <Button className="cart__to-order-btn" onClick={toggleCreateOrder}>
+                To order <CartIcon />
+              </Button>
+            ) : null}
+            <div className="cart__total-payable">
+              Total payable: <span>{total} $</span>
+            </div>
           </div>
         </div>
       </Container>
+      {createOrder ? (
+        <ToOrderModal 
+          sending={sending} 
+          success={sendingSuccess} 
+          error={sendingError} 
+          sendOrder={sendOrderData} 
+          onCloseClick={toggleCreateOrder} />
+      ) : null}
     </main>
   );
 };

@@ -1,22 +1,27 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Loader, Container, Counter, Button, ErrorMessage } from '../../components';
 import { CheckIcon } from '../../components/Icons';
 import { getDateTimeString } from '../../handlers/product';
 import { useProductPage, useCounter } from '../../hooks';
 import { selectCart } from '../Cart/selectors';
 import { changeCart } from '../Cart/actions';
-import PropTypes from 'prop-types';
+import { productModalChangeProduct } from '../ProductModal/actions';
 import './ProductPage.scss';
 
-const ProductPage = ({ match }) => {
-  const { productInfo, loading, error } = useProductPage(match.params.id);
+const ProductPage = () => {
+  const { id } = useParams();
+  const { productInfo, loading, error } = useProductPage(id);
+
   const { counter, setCounter } = useCounter();
 
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
 
   const isInCart = productInfo ? cart.products[productInfo.id] : false;
+
+  const editProduct = (data) => dispatch(productModalChangeProduct(data));
 
   const addProductToCart = () => {
     dispatch(
@@ -28,6 +33,26 @@ const ProductPage = ({ match }) => {
       }),
     );
   };
+
+  const productPanel = productInfo.isEditable ? (
+    <div className="product__edit">
+      <div className="product__price">
+        Price: <span>{productInfo.price} $</span>
+      </div>
+      <Button onClick={() => editProduct(productInfo)}>Edit</Button>
+    </div>
+  ) : (
+    <>
+      <div className="product__price">
+        Price for one: <span>{productInfo.price} $</span>
+      </div>
+      <div className="product__total-price">
+        (total: <span>{productInfo.price * counter} $</span>)
+      </div>
+      <Counter value={counter} setCounter={setCounter} />
+      <Button onClick={addProductToCart}>Add to cart</Button>
+    </>
+  );
 
   let content;
 
@@ -47,23 +72,14 @@ const ProductPage = ({ match }) => {
                 In cart !
               </div>
             ) : (
-              <>
-                <div className="product__price">
-                  Price for one: <span>{productInfo.price} $</span>
-                </div>
-                <div className="product__total-price">
-                  (total: <span>{productInfo.price * counter} $</span>)
-                </div>
-                <Counter value={counter} setCounter={setCounter} />
-                <Button onClick={addProductToCart}>Add to cart</Button>
-              </>
+              productPanel
             )}
           </div>
           <div className="product__info">
             <h2>About this product:</h2>
             <ul className="product__options-list">
               <li>
-                Product origin: <span>{productInfo.origin}</span>
+                Product origin: <span>{productInfo.originName}</span>
               </li>
               <li>
                 Product was created in: <span>{getDateTimeString(productInfo.createdAt)}</span>
@@ -82,14 +98,6 @@ const ProductPage = ({ match }) => {
   }
 
   return <main className="product">{content}</main>;
-};
-
-ProductPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }),
-  }),
 };
 
 export default ProductPage;

@@ -1,27 +1,36 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Header } from './components';
-import { Products, ProductPage, Cart } from './pages';
+import { Products, ProductPage, Cart, ProductModal, Orders, OrderPage } from './pages';
+import { selectProductModal } from './pages/ProductModal/selectors';
 import { Switch, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
+import {
+  CART_PATH,
+  MY_PRODUCTS_PATH,
+  ORDERS_PATH,
+  ORDER_PATH,
+  PRODUCT_BY_ID_PATH,
+  PRODUCT_LIST_PATH,
+} from './constants/paths';
 import './App.scss';
 
-function App() {
+const App = () => {
+  const { isOpen } = useSelector(selectProductModal);
+
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <div className="App">
-          <Route path="/" component={Header} />
-          <Switch>
-            <Route path="/cart" component={Cart} />
-            <Route path="/:id" component={ProductPage} />
-            <Route path="/" component={Products} />
-          </Switch>
-        </div>
-      </Provider>
-    </BrowserRouter>
+    <div className="App">
+      <Header />
+      <Switch>
+        <Route path={ORDER_PATH} component={OrderPage} />
+        <Route path={ORDERS_PATH} component={Orders} />
+        <Route path={MY_PRODUCTS_PATH} component={Products} />
+        <Route path={CART_PATH} component={Cart} />
+        <Route path={PRODUCT_BY_ID_PATH} component={ProductPage} />
+        <Route path={PRODUCT_LIST_PATH} component={Products} />
+      </Switch>
+      {isOpen ? <ProductModal /> : null}
+    </div>
   );
-}
+};
 
 export default App;

@@ -4,7 +4,7 @@ import {
   ProductList,
   SortBar,
   Loader,
-  AddToCartPopUp,
+  AddToCartModal,
   ErrorMessage,
 } from '../../components';
 import { useProductList } from '../../hooks';
@@ -12,9 +12,9 @@ import { PAGE } from '../../constants/queries';
 import './Products.scss';
 
 const Products = () => {
-  const { products, loading, error, queries, origins, totalPages } = useProductList();
+  const { products, loading, error, queries, origins, totalPages, isMyProducts } = useProductList();
 
-  const [popUp, changePopUp] = useState(null);
+  const [modal, changeModal] = useState(null);
 
   let content;
 
@@ -27,7 +27,7 @@ const Products = () => {
       <>
         <SortBar origins={origins} queries={queries} />
         <ProductList
-          changePopUp={changePopUp}
+          changeModal={changeModal}
           products={products}
           currentPage={queries[PAGE]}
           totalPages={totalPages}
@@ -40,10 +40,10 @@ const Products = () => {
   return (
     <main className="products">
       <Container>
-        <h1>All products</h1>
+        <h1>{isMyProducts ? 'My products' : 'All products'}</h1>
         {content}
       </Container>
-      {popUp ? <AddToCartPopUp {...popUp} changePopUp={changePopUp} /> : null}
+      {modal ? <AddToCartModal {...modal} changeModal={changeModal} /> : null}
     </main>
   );
 };

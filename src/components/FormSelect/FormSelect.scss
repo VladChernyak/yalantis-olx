@@ -1,0 +1,18 @@
+@import '../../assets/mixins';
+
+.form-select {
+  position: relative;
+  padding-bottom: 18px;
+  .select {
+    padding: 8px;
+    position: relative;
+    z-index: 1;
+    transition: 0.2s;
+    &.error {
+      @include error-field;
+    }
+  }
+  &__error {
+    @include error-text;
+  }
+}

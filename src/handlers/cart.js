@@ -34,3 +34,11 @@ const getProductsCount = (products) =>
   Object.values(products).reduce((sum, item) => {
     return (sum += item.count);
   }, 0);
+
+export const createOrderData = (products) => {
+  const pieces = Object.values(products).map(({ id, count }) => ({ productId: id, count }));
+
+  return {
+    order: { pieces },
+  };
+};

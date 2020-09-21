@@ -1,0 +1,16 @@
+@import '../../assets/mixins';
+
+.modal-success {
+  background-color: #fff;
+  @include modal-info;
+  h2 {
+    margin-bottom: 15px;
+  }
+  &__icon {
+    width: 70px;
+    color: $green;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
+}

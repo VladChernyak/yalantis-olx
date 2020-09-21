@@ -1,0 +1,23 @@
+@import '../../assets/variables';
+
+.to-order-modal {
+  position: relative;
+  min-height: 250px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  &__cancel.button {
+    background-color: $light-grey;
+    border-color: $light-grey;
+    &:hover {
+      color: $light-grey !important;
+    }
+  }
+  .modal-success {
+    padding-top: 40px;
+  }
+  .modal-error {
+    padding-top: 50px;
+  }
+}

@@ -7,6 +7,43 @@
   .container {
     height: 100%;
   }
+  &__left-side {
+    display: flex;
+    align-items: center;
+  }
+  &__nav {
+    margin-left: 70px;
+    a {
+      text-decoration: none;
+      &:not(:last-child) {
+        margin-right: 25px;
+      }
+    }
+  }
+  &__nav a {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    transition: 0.2s;
+    &:hover {
+      opacity: 0.7;
+      color: $violet;
+    }
+  }
+  &__add-product {
+    font-family: inherit;
+    font-weight: 700;
+    color: $violet;
+    padding: 3px 5px;
+    border: 1px solid $violet;
+    border-radius: 5px;
+    margin-left: 25px;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
   &__content {
     height: 100%;
     display: flex;

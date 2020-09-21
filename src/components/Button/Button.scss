@@ -2,14 +2,18 @@
 
 .button {
   padding: 0.3em 1em;
+  background-color: $violet;
+  color: #fff;
   border: 1px solid $violet;
   border-radius: 0.5em;
   font-size: 18px;
-  color: $violet;
   transition: 0.2s;
   cursor: pointer;
-  &:hover {
-    background-color: $violet;
-    color: #fff;
+  &:hover:not([disabled]) {
+    color: $violet;
+    background: none;
+  }
+  &[disabled] {
+    opacity: 0.5;
   }
 }
