@@ -1,8 +1,9 @@
 import { GET_ORDERS_FAILURE } from '../Orders/actionTypes';
 import { GET_ORDER, GET_ORDER_SUCCESS, ORDER_PAGE_RESET } from './actionTypes';
 
-export const getOrder = () => ({
+export const getOrder = (orderId) => ({
   type: GET_ORDER,
+  payload: { orderId },
 });
 
 export const getOrderSuccess = (data) => ({

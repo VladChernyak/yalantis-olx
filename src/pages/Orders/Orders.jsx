@@ -1,9 +1,12 @@
 import React from 'react';
 import { Container, Loader, ErrorMessage, OrderItem } from '../../components';
-import { useOrders } from '../../hooks';
+import { useOrders, useInjectSaga } from '../../hooks';
+import saga from './sagas';
 import './Orders.scss';
 
 const Orders = () => {
+  useInjectSaga('orders', saga);
+
   const { loading, error, orders } = useOrders();
 
   let content = (

@@ -3,18 +3,24 @@ import { useSelector } from 'react-redux';
 import { Container, CartProduct, Button, ToOrderModal } from '../../components';
 import { CrossIcon, CartIcon } from '../../components/Icons';
 import { selectCart } from './selectors';
-import { useSendOrder } from '../../hooks';
-import { createOrderData } from '../../handlers/cart';
+import { useSendOrder, useInjectSaga } from '../../hooks';
+import saga from './sagas';
 import './Cart.scss';
 
 const Cart = () => {
+  useInjectSaga('cart', saga);
+
   const { products, total } = useSelector(selectCart);
   const productsArray = Object.entries(products);
 
-  const { sending, sendingSuccess, sendingError, createOrder, sendOrder, toggleCreateOrder } = useSendOrder();
-
-  const sendOrderData = () => sendOrder(createOrderData(products));
-
+  const {
+    sending,
+    sendingSuccess,
+    sendingError,
+    createOrder,
+    sendOrder,
+    toggleCreateOrder,
+  } = useSendOrder();
 
   return (
     <main className="cart">
@@ -46,12 +52,13 @@ const Cart = () => {
         </div>
       </Container>
       {createOrder ? (
-        <ToOrderModal 
-          sending={sending} 
-          success={sendingSuccess} 
-          error={sendingError} 
-          sendOrder={sendOrderData} 
-          onCloseClick={toggleCreateOrder} />
+        <ToOrderModal
+          sending={sending}
+          success={sendingSuccess}
+          error={sendingError}
+          sendOrder={sendOrder}
+          onCloseClick={toggleCreateOrder}
+        />
       ) : null}
     </main>
   );

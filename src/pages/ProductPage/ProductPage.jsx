@@ -1,24 +1,23 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Loader, Container, Counter, Button, ErrorMessage } from '../../components';
 import { CheckIcon } from '../../components/Icons';
 import { getDateTimeString } from '../../handlers/product';
-import { useProductPage, useCounter } from '../../hooks';
+import { useProductPage, useCounter, useInjectSaga } from '../../hooks';
 import { selectCart } from '../Cart/selectors';
 import { changeCart } from '../Cart/actions';
 import { productModalChangeProduct } from '../ProductModal/actions';
+import saga from './sagas';
 import './ProductPage.scss';
 
 const ProductPage = () => {
-  const { id } = useParams();
-  const { productInfo, loading, error } = useProductPage(id);
+  useInjectSaga('product-page', saga);
 
+  const { productInfo, loading, error } = useProductPage();
   const { counter, setCounter } = useCounter();
 
   const dispatch = useDispatch();
   const cart = useSelector(selectCart);
-
   const isInCart = productInfo ? cart.products[productInfo.id] : false;
 
   const editProduct = (data) => dispatch(productModalChangeProduct(data));

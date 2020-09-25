@@ -2,17 +2,21 @@ import React from 'react';
 import { PaginationSide } from '../';
 import { ChevroneIcon } from '../Icons';
 import { createButtonNumbers } from '../../handlers/pagination';
-import { useDispatch } from 'react-redux';
-import { setProductListQuery } from '../../pages/Products/actions';
-import { PAGE } from '../../constants/queries';
+import { IS_EDITABLE, MAX_PRICE, MIN_PRICE, ORIGINS, PAGE } from '../../constants/queries';
 import PropTypes from 'prop-types';
 import './Pagination.scss';
+import { useHistory } from 'react-router-dom';
+import { getUrl } from '../../handlers/requests';
 
-const Pagination = ({ currentPage, totalPages }) => {
+const Pagination = ({ queries, totalPages }) => {
+  const {
+    location: { pathname },
+    push,
+  } = useHistory();
+  const currentPage = Number(queries[PAGE]);
   const buttons = createButtonNumbers(currentPage, totalPages);
-  const dispatch = useDispatch();
 
-  const setPage = (num) => dispatch(setProductListQuery({ [PAGE]: num }));
+  const setPage = (num) => push(getUrl(pathname, { ...queries, [PAGE]: num }));
   const goPreviousPage = () => setPage(currentPage - 1);
   const goNextPage = () => setPage(currentPage + 1);
 
@@ -50,7 +54,13 @@ const Pagination = ({ currentPage, totalPages }) => {
 };
 
 Pagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
+  queries: PropTypes.shape({
+    [PAGE]: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    [MIN_PRICE]: PropTypes.string,
+    [MAX_PRICE]: PropTypes.string,
+    [IS_EDITABLE]: PropTypes.string,
+    [ORIGINS]: PropTypes.string,
+  }),
   totalPages: PropTypes.number.isRequired,
 };
 

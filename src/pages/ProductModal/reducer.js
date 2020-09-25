@@ -5,10 +5,15 @@ import {
   PRODUCT_MODAL_TOGGLE,
   PRODUCT_MODAL_RESET,
   PRODUCT_MODAL_CHANGE_PRODUCT,
+  PRODUCT_FORM_GET_ORIGINS,
+  PRODUCT_FORM_GET_ORIGINS_SUCCESS,
+  PRODUCT_FORM_GET_ORIGINS_ERROR,
 } from './actionTypes';
 
 const initialState = {
   isOpen: false,
+  loading: true,
+  origins: [],
   submitting: false,
   success: false,
   error: false,
@@ -19,6 +24,12 @@ const addNewProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case PRODUCT_MODAL_TOGGLE:
       return { ...state, isOpen: !state.isOpen };
+    case PRODUCT_FORM_GET_ORIGINS:
+      return { ...state, loading: true };
+    case PRODUCT_FORM_GET_ORIGINS_SUCCESS:
+      return { ...state, loading: false, origins: action.payload.origins };
+    case PRODUCT_FORM_GET_ORIGINS_ERROR:
+      return { ...state, loading: false, error: true };
     case PRODUCT_MODAL_REQUEST:
       return { ...state, submitting: true };
     case PRODUCT_MODAL_SUCCESS:

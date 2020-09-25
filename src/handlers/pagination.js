@@ -1,4 +1,7 @@
 export const createButtonNumbers = (currentPage, totalPages) => {
+  currentPage = Number(currentPage);
+  totalPages = Number(totalPages);
+
   const buttonCount = 5,
     halfPages = Math.round(totalPages / 2),
     leftSide = [],

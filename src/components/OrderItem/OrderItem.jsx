@@ -21,7 +21,7 @@ const OrderItem = ({ createdAt, id, pieces }) => (
       <div className="order-item__subtitle">Order price:</div>
       {getOrderTotalPrice(pieces)} $
     </div>
-    <Link to={ORDERS_PATH + '/' + id}>
+    <Link to={ORDERS_PATH + '/' + id} className="order-item__link">
       <Button>More...</Button>
     </Link>
   </li>

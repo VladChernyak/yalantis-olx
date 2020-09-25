@@ -1,50 +1,23 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { PRODUCTS_LINK, PRODUCTS_ORIGINS_LINK } from '../api/apiLinks';
-import { sendRequest, postData, patchData } from '../api/requests';
-import {
-  productModalFailure,
-  productModalRequest,
-  productModalSuccess,
-} from '../pages/ProductModal/actions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { productFormGetOrigins, productModalRequest } from '../pages/ProductModal/actions';
+import { selectProductModal } from '../pages/ProductModal/selectors';
 
 const useProductForm = () => {
-  const [origins, setOrigins] = useState(null);
   const dispatch = useDispatch();
+  const { origins, loading } = useSelector(selectProductModal);
 
   useEffect(() => {
-    const getOrigins = async () => {
-      const response = await sendRequest(PRODUCTS_ORIGINS_LINK);
+    dispatch(productFormGetOrigins());
 
-      setOrigins(response.data.items);
-    };
-
-    getOrigins();
+    // eslint-disable-next-line
   }, []);
 
-  const submitForm = async (data, productId) => {
-    try {
-      dispatch(productModalRequest());
-
-      const {
-        data: { id },
-      } = productId
-        ? await patchData(PRODUCTS_LINK + '/' + productId, data)
-        : await postData(PRODUCTS_LINK, data);
-
-      dispatch(productModalSuccess(id));
-    } catch (error) {
-      const {
-        response: { data },
-      } = await error;
-
-      dispatch(productModalFailure(data.error.message));
-    }
-  };
+  const submitForm = (data, productId) => dispatch(productModalRequest(data, productId));
 
   return {
     origins,
-    loading: !origins,
+    loading,
     submitForm,
   };
 };

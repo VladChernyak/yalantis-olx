@@ -21,7 +21,12 @@ const ToOrderModal = ({ sending, success, error, onCloseClick, sendOrder }) => (
 
 ToOrderModal.propTypes = {
   sending: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
+  success: PropTypes.oneOfType([
+    PropTypes.shape({
+      orderId: PropTypes.string,
+    }),
+    PropTypes.bool,
+  ]).isRequired,
   error: PropTypes.bool.isRequired,
   onCloseClick: PropTypes.func.isRequired,
   sendOrder: PropTypes.func.isRequired,
