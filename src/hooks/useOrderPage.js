@@ -13,9 +13,7 @@ const useOrderPage = () => {
     dispatch(getOrder(orderId));
 
     return () => dispatch(orderPageReset());
-
-    // eslint-disable-next-line
-  }, []);
+  }, [orderId, dispatch]);
 
   return {
     data,

@@ -15,9 +15,7 @@ const useProductPage = () => {
     dispatch(getProductById(id));
 
     return () => dispatch(productPageReset());
-
-    // eslint-disable-next-line
-  }, [id, success]);
+  }, [id, success, dispatch]);
 
   return {
     productInfo,

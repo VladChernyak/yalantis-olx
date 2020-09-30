@@ -9,9 +9,7 @@ const useProductForm = () => {
 
   useEffect(() => {
     dispatch(productFormGetOrigins());
-
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   const submitForm = (data, productId) => dispatch(productModalRequest(data, productId));
 

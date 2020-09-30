@@ -21,7 +21,7 @@ function* workSendProductForm({ payload: { data, productId } }) {
   } catch (error) {
     const {
       response: { data },
-    } = yield error;
+    } = error;
 
     yield put(productModalFailure(data.error.message));
   }

@@ -2,6 +2,7 @@ import { IS_EDITABLE, PAGE } from '../constants/queries';
 
 export const getUrl = (url, queryParams) => {
   if (!queryParams) return url;
+  if (typeof queryParams === 'string') return url + queryParams;
 
   const queryString = Object.entries(queryParams).reduce((string, [query, value], idx, array) => {
     const leftSide = idx === 0 ? '?' + query : query;

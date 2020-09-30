@@ -19,7 +19,7 @@ function* workSendOrder() {
   } catch (error) {
     const {
       response: { data },
-    } = yield error;
+    } = error;
 
     yield put(sendingOrderFailure(data.error.message));
   }

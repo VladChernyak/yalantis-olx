@@ -14,14 +14,11 @@ const useProductList = () => {
   const isMyProducts = pathname === MY_PRODUCTS_PATH;
   const queriesString = isMyProducts ? getMyProductsQueries(search) : search;
 
-  // eslint-disable-next-line
-  useEffect(() => () => dispatch(productListReset()), [pathname]);
+  useEffect(() => () => dispatch(productListReset()), [pathname, dispatch]);
 
   useEffect(() => {
     dispatch(productListRequest(queriesString));
-
-    // eslint-disable-next-line
-  }, [pathname, search]);
+  }, [pathname, search, dispatch, queriesString]);
 
   return {
     products,

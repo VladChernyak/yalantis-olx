@@ -11,9 +11,7 @@ const useOrders = () => {
     dispatch(getOrders());
 
     return () => dispatch(ordersReset());
-
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   return {
     loading,
