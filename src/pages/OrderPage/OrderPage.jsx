@@ -1,14 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { Container, Loader, ErrorMessage, OrderProduct } from '../../components';
 import { getDateTimeString } from '../../handlers/product';
-import { useOrderPage } from '../../hooks';
+import { useOrderPage, useInjectSaga } from '../../hooks';
 import { getOrderTotalPrice } from '../../handlers/order';
+import saga from './sagas';
 import './OrderPage.scss';
 
 const OrderPage = () => {
-  const { id } = useParams();
-  const { loading, error, data } = useOrderPage(id);
+  useInjectSaga('order-page', saga);
+
+  const { loading, error, data } = useOrderPage();
 
   let content = (
     <Container>

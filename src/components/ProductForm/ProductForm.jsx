@@ -1,12 +1,15 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { FormInput, FormSelect, Button, Loader } from '..';
-import { useProductForm } from '../../hooks';
+import { useInjectSaga, useProductForm } from '../../hooks';
+import saga from '../../pages/ProductModal/sagas';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import './ProductForm.scss';
 
 const ProductForm = ({ name, price, origin, id }) => {
+  useInjectSaga('product-form', saga);
+
   const { origins, loading, submitForm } = useProductForm();
 
   const submitButtonText = name ? 'Edit' : 'Create';
@@ -66,6 +69,7 @@ ProductForm.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   origin: PropTypes.string.isRequired,
+  id: PropTypes.string,
 };
 
 export default ProductForm;

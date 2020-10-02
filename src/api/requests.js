@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { getUrl } from '../handlers/requests';
 import { API_KEY } from '../api/key';
+import { getUrl } from '../handlers/requests';
 
-export const sendRequest = (url, query) =>
+export const sendRequest = (url, query = '') =>
   axios.get(getUrl(url, query), { headers: { Authorization: API_KEY } });
 
 export const postData = (url, data) =>

@@ -58,3 +58,19 @@
     }
   }
 }
+
+@media (max-width: 426px) {
+  .cart {
+    &__to-order {
+      flex-direction: column-reverse;
+      align-content: flex-end;
+      &-btn {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+    }
+    &__total-payable {
+      font-size: 18px;
+    }
+  }
+}

@@ -13,3 +13,16 @@
     color: $light-grey;
   }
 }
+
+@media (max-width: 426px) {
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+    > *:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    &__link {
+      align-self: flex-end;
+    }
+  }
+}

@@ -9,7 +9,7 @@ const PaginationSide = ({ numbers, currentPage, setPage }) => {
         <button
           onClick={() => setPage(num)}
           key={num}
-          className={classNames('pagination__page-btn', { current: num === currentPage })}>
+          className={classNames('pagination__page-btn', { current: num === Number(currentPage) })}>
           {num}
         </button>
       ))}
@@ -19,7 +19,7 @@ const PaginationSide = ({ numbers, currentPage, setPage }) => {
 
 PaginationSide.propTypes = {
   numbers: PropTypes.array.isRequired,
-  currentPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   setPage: PropTypes.func.isRequired,
 };
 
